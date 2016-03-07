@@ -11,19 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcomeAuth');
-});
-
-Route::get('/demo', function() {
-	return view('layouts.dashboard');
-});
-
-Route::get('/charts', function()
-{
-	return View::make('mcharts');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -35,12 +22,21 @@ Route::get('/charts', function()
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/homeAuth', 'HomeController@index');
+    Route::get('/', function() {
+		return view('home');
+	})->middleware('auth');
+    
+    Route::get('/charts', function()
+	{
+		return View::make('mcharts');
+	})->middleware('auth');
+
+    Route::get('/settings', function() {
+    	return view('settings');
+    })->middleware('auth');
+    //Route::get('/homeAuth', 'HomeController@index');
 });
