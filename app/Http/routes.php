@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('password/reset', function() {
+    return view('auth.passwords.reset');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -34,6 +38,11 @@ Route::group(['middleware' => 'web'], function () {
 	{
 		return View::make('mcharts');
 	})->middleware('auth');
+
+    Route::get('/address/update', function()
+    {
+        return View::make('address');
+    })->middleware('auth');
 
     Route::get('/settings', function() {
     	return view('settings');
