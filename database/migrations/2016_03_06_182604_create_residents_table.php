@@ -13,7 +13,6 @@ class CreateResidentsTable extends Migration
     public function up()
     {
         Schema::create('residents', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('residenceId');
             $table->integer('userId');
             $table->timestamps();

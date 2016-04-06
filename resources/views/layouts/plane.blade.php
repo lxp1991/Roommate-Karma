@@ -18,10 +18,17 @@
     <!-- <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'> -->
     <!-- Styles -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- date picker -->
+    <link href=" {{ asset("datepicker/classic.css") }}" rel="stylesheet">
+    <link href=" {{ asset("datepicker/classic.date.css") }}" rel="stylesheet">
+
+
 </head>
 <body>
 	@yield('body')
 	<script src="{{ asset("scripts/frontend.js") }}" type="text/javascript"></script>
-	  
+	<script src="{{ asset("datepicker/picker.js") }}"></script>
+    <script src="{{ asset("datepicker/picker.date.js") }}"></script>  
 </body>
 </html>

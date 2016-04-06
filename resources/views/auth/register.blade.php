@@ -102,7 +102,7 @@
                             <label class="col-md-4 control-label">Birth</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="birth" placeholder="YYYY/MM/DD" value="{{ old('birth') }}">                        
+                                <input id="date" type="text" class="form-control" name="birth" placeholder="YYYY/MM/DD" value="{{ old('birth') }}">                        
                                 @if ($errors->has('birth'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('birth') }}</strong>
@@ -119,6 +119,13 @@
                             </div>
                         </div>
                     </form>
+                    <!-- After including the date picker scripts -->
+                    <script>
+                        $(function() {
+                         // Enable Pickadate on an input field
+                            $('#birth').pickadate();
+                        });   
+                    </script>
                 </div>
             </div>
         </div>

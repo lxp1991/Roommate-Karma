@@ -13,8 +13,8 @@ class CreateResidencesTable extends Migration
     public function up()
     {
         Schema::create('residences', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('residenceId');
+            $table->increments('residenceId');
+            $table->integer('userid');
             $table->string('type');
             $table->string('address1');
             $table->string('address2');
@@ -22,6 +22,7 @@ class CreateResidencesTable extends Migration
             $table->string('state');
             $table->string('country');
             $table->integer('zipcode');
+            $table->boolean('isActive');
             $table->timestamps();
         });
     }

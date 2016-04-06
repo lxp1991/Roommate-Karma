@@ -13,9 +13,7 @@ class CreateJobsTable extends Migration
     public function up()
     {
         Schema::create('jobs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('jobId');
-            $table->integer('taskId');
+            $table->increments('jobId');
             $table->integer('residenceId');
             $table->integer('userId');
             $table->integer('karmaScores');

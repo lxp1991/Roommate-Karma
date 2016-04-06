@@ -24,7 +24,7 @@
     				<div class="row">
         				<div class="col-md-8">
             				<div class="panel panel-default">
-               				<div class="panel-heading">Account</div>
+               				<!-- <div class="panel-heading"></div> -->
 	        					<div class="panel-body">
                             		<label class="col-md-3">Password</label>
 			                        <div class="row">

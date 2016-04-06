@@ -10,9 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('password/reset', function() {
-    return view('auth.passwords.reset');
+Route::get('/story', function() {
+    return view('create');
 });
 
 /*
@@ -44,8 +43,10 @@ Route::group(['middleware' => 'web'], function () {
         return View::make('address');
     })->middleware('auth');
 
+    Route::post('/address/update', 'AddressController@store');
+
     Route::get('/settings', function() {
     	return view('settings');
     })->middleware('auth');
-    //Route::get('/homeAuth', 'HomeController@index');
+
 });
