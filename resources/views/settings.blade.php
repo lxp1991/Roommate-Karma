@@ -3,6 +3,23 @@
 @section('section')
 <div class="col-sm-12">	
 	<div class="row">
+        @if(Session::has('flash_notification.message'))
+        	<div class="alert alert-{{ Session::get('flash_notification.level') }}" id="addr-success-alert">
+            	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Success!</strong> {{ Session::get('flash_notification.message') }}
+            </div>
+        @endif
+        <!-- TODO -->
+        <script>
+
+
+		window.setTimeout(function() {
+    		$(".addr-success-alert").fadeTo(500, 0).slideUp(500, function(){
+        		$(this).remove(); 
+    		});
+		}, 4000);
+
+ 		</script>
 		<ul class="nav nav-tabs">
 			<li class="active">
 				<a data-toggle="tab" href="#account">Account</a>
@@ -23,7 +40,7 @@
 				<div class="container">
     				<div class="row">
         				<div class="col-md-8">
-            				<div class="panel panel-default">
+            				<div class="panel noborder">
                				<!-- <div class="panel-heading"></div> -->
 	        					<div class="panel-body">
                             		<label class="col-md-3">Password</label>

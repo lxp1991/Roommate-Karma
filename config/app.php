@@ -156,7 +156,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-	'Collective\Html\HtmlServiceProvider',
+	    'Collective\Html\HtmlServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
+        'Cornford\Googlmapper\MapperServiceProvider',
+        'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
     ],
 
     /*
@@ -203,8 +206,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-	'Form'	    => 'Collective\Html\FormFacade',
-	'Html'      => 'Collective\Html\HtmlFacade',
+    	'Form'	    => 'Collective\Html\FormFacade',
+    	'Html'      => 'Collective\Html\HtmlFacade',
+        'Flash'     => 'Laracasts\Flash\Flash',
+        'Mapper'    => 'Cornford\Googlmapper\Facades\MapperFacade',
     ],
 
 ];

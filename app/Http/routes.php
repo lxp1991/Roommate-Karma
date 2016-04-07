@@ -45,6 +45,13 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/address/update', 'AddressController@store');
 
+    //TODO
+    Route::get('/password/reset', function() {
+        return view('auth.passwords.email');
+    })->middleware('auth');
+
+    Route::get('/map', 'MapController@draw');
+
     Route::get('/settings', function() {
     	return view('settings');
     })->middleware('auth');

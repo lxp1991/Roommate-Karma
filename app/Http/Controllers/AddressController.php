@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use App\User;
 use App\Resident;
-use Illuminate\Support\Facades\DB;
+use Flash;
+
 
 class AddressController extends Controller
 {
@@ -51,7 +54,11 @@ class AddressController extends Controller
     		'isActive' => true,
     	]);
 
-    	return $request->input('address1').$request->input('address2').$request->input('zipcode');
+        Flash::success('Your address has been updated!');
+
+        return Redirect::to('/settings')
+            ->with('addr_success', true)
+            ->with('message','Your address has been updated!');
 
     }
 }

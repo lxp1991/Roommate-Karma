@@ -257,6 +257,17 @@
                         <li {{ (Request::is('*forms') ? 'class="active"' : '') }}>
                             <a href="{{ url ('forms') }}"><i class="fa fa-edit fa-fw"></i> Rewarded Tasks</a>
                         </li>
+                        <li {{ (Request::is('*map') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('map') }}"><i class="glyphicon glyphicon-map-marker"></i> Find On Map</a>
+                        </li>
+<!--                         <li {{ (Request::is('*map') ? 'class="active"' : '') }}>
+                            <a href="javascript:popup()"><i class="glyphicon glyphicon-map-marker"></i> Find On Map</a>
+                        </li>   -->                      
+<!--                         <script type="text/javascript">
+                            function popup(){
+                                cuteLittleWindow = window.open("{{ url ('map') }}", "littleWindow", "location=no,width=800,height=600"); 
+                            }
+                        </script> -->
 <!--                         <li >
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -312,7 +323,8 @@
                             <!-- /.nav-second-level -->
                         <!-- </li> -->
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Find on Map<span class="fa arrow"></span></a>
+                            <!-- <a href="#"><i class="fa fa-files-o fa-fw"></i> Find on Map<span class="fa arrow"></span></a> -->
+                            <a href="#"><i class="glyphicon glyphicon-map-marker"></i> Find on Map<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*blank') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('blank') }}">Blank Page</a>

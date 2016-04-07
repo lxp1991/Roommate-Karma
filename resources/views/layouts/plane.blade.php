@@ -13,22 +13,20 @@
 	<meta content="" name="author"/>
 
 	<link rel="stylesheet" href="{{ asset("stylesheets/styles.css") }}" />
-	<!-- Fonts -->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'> -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'> -->
-    <!-- Styles -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
-
-    <!-- date picker -->
-    <link href=" {{ asset("datepicker/classic.css") }}" rel="stylesheet">
-    <link href=" {{ asset("datepicker/classic.date.css") }}" rel="stylesheet">
-
-
+	<link rel="stylesheet" href="{{ asset("stylesheets/customizedStyle.css") }}" />
+    <style type="text/css">
+        #map { 
+        	height: 600px;
+        	width: 800px; 
+        }
+    </style>
 </head>
 <body>
 	@yield('body')
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
+
+
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 	<script src="{{ asset("scripts/frontend.js") }}" type="text/javascript"></script>
-	<script src="{{ asset("datepicker/picker.js") }}"></script>
-    <script src="{{ asset("datepicker/picker.date.js") }}"></script>  
 </body>
 </html>
