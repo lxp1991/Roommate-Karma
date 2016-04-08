@@ -40,7 +40,7 @@ class AddressController extends Controller
                 ->where('userid', $userid)
                 ->where('isActive', true)
                 ->update(['isActive' => false]);
-        }
+        } 
 
 
     	DB::table('residences')->insert([

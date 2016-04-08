@@ -158,8 +158,7 @@ return [
 
 	    'Collective\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
-        'Cornford\Googlmapper\MapperServiceProvider',
-        'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
+
     ],
 
     /*
@@ -208,8 +207,7 @@ return [
 
     	'Form'	    => 'Collective\Html\FormFacade',
     	'Html'      => 'Collective\Html\HtmlFacade',
-        'Flash'     => 'Laracasts\Flash\Flash',
-        'Mapper'    => 'Cornford\Googlmapper\Facades\MapperFacade',
+        'Flash'     => 'Laracasts\Flash\Flash'
     ],
 
 ];

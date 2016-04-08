@@ -10,9 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/story', function() {
-    return view('create');
-});
+// Route::get('/error/404', function () {
+//     return view('error.404');
+// });
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +51,16 @@ Route::group(['middleware' => 'web'], function () {
     })->middleware('auth');
 
     Route::get('/map', 'MapController@draw');
+
+    Route::get('/task/view', function() {
+        return view('viewtask');
+    })->middleware('auth');
+
+    Route::get('/task/create', function() {
+        return view('createtask');
+    })->middleware('auth');
+    
+    Route::post('/task/create', 'TaskController@store');
 
     Route::get('/settings', function() {
     	return view('settings');

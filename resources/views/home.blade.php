@@ -1,7 +1,13 @@
 @extends('layouts.dashboard')
 @section('page_heading','Dashboard')
+
 @section('section')
-           
+@if(Session::has('flash_notification.message'))
+    <div class="alert alert-{{ Session::get('flash_notification.level') }}" id="addr-success-alert">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Success!</strong> {{ Session::get('flash_notification.message') }}
+    </div>
+@endif           
             <!-- /.row -->
             <div class="col-sm-12">
             <div class="row">
