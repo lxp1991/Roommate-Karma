@@ -1,8 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row">
+        @if(Session::has('flash_notification.message'))
+            <div class="alert alert-{{ Session::get('flash_notification.level') }}" id="addr-success-alert">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Success!</strong> {{ Session::get('flash_notification.message') }}
+            </div>
+        @endif  
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Address</div>

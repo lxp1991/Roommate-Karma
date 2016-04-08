@@ -12,6 +12,35 @@
             
 
         <ul class="timeline">
+        @for ($i = 0; $i < count($tasks); $i++)
+        	@if ($i % 2 == 1)
+        		<li class="timeline-inverted">
+        	@else
+        		<li>
+        	@endif
+        	
+        			@if ($tasks[$i]->isCompleted)
+        			    <div class="timeline-badge success">
+        					<i class="fa fa-check"></i>
+        			@elseif ($tasks[$i]->isActive)
+        			    <div class="timeline-badge info">
+        					<i class="fa fa-play"></i>
+        			
+        			@endif 
+        		</div>
+        		<div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4 class="timeline-title">{{ $tasks[$i]->title }}</h4>
+                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{ $tasks[$i]->releaseDate }}</small>
+                        </p>
+                    </div>
+                    <div class="timeline-body">
+                        <p>{{ $tasks[$i]->description }}</p>
+                    </div>
+                </div>
+        	</li>
+        @endfor
+
             <li>
                 <div class="timeline-badge"><i class="fa fa-check"></i>
                 </div>

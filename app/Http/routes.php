@@ -52,9 +52,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/map', 'MapController@draw');
 
-    Route::get('/task/view', function() {
-        return view('viewtask');
-    })->middleware('auth');
+    Route::get('/task/view', 'TaskController@view');
 
     Route::get('/task/create', function() {
         return view('createtask');

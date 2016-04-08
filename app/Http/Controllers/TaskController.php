@@ -13,6 +13,11 @@ class TaskController extends Controller
 {
     //
 
+    public function view() {
+        $tasks = DB::table('tasks')->get();
+        return view('viewtask')->with('tasks', array_reverse($tasks));
+    }
+
     public function store(Request $request) {
     	$user = Auth::user();
     	$userid = $user->id;
@@ -31,8 +36,8 @@ class TaskController extends Controller
             ->first();
 
     	if (count($residence) == 0) {
-            Flash::error('You have not registered with an address.');
-            return view('errors.general');
+            Flash::error('You have not registered with an address, please add an address first');
+            return Redirect::to('/address/update');
         }
 
     	$residenceid = $residence->residenceId;
