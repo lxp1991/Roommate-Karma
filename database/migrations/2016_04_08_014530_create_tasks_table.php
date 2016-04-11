@@ -16,6 +16,7 @@ class CreateTasksTable extends Migration
             $table->increments('taskId');
             $table->integer('residenceId');
             $table->integer('userId');
+            $table->integer('isTakenById');
             $table->string('title');
             $table->text('description');
             $table->integer('bounty');

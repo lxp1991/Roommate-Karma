@@ -54,6 +54,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/task/view', 'TaskController@view');
 
+    Route::get('/task/{taskId}', 'TaskController@taskDetail')->middleware('auth');
+
+    Route::post('/task/view/{taskId}', 'TaskController@take');
+
     Route::get('/task/create', function() {
         return view('createtask');
     })->middleware('auth');

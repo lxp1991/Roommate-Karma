@@ -15,7 +15,7 @@
                 <div class="panel-heading">Address</div>
                 <div class="panel-body">
                     {{ Form::open() }}
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('address1') ? ' has-error' : '' }}">
@@ -172,7 +172,7 @@
 
                             </div>
                         </div>
-                    </form>
+
                 {{ Form::close() }}
                 </div>
             </div>

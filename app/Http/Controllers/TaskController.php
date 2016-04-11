@@ -13,6 +13,16 @@ class TaskController extends Controller
 {
     //
 
+    public function take($taskId) {
+        
+        return $taskId;
+    }
+
+    public function taskDetail($taskId) {
+        
+        return $taskId;
+    }
+
     public function view() {
         $tasks = DB::table('tasks')->get();
         return view('viewtask')->with('tasks', array_reverse($tasks));
@@ -44,6 +54,7 @@ class TaskController extends Controller
         DB::table('tasks')->insert([
             'residenceId' => $residenceid,
             'userId' => $userid,
+            'isTakenById' => 0,
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'releaseDate' => Carbon::now(),
