@@ -28,7 +28,7 @@ class TaskController extends Controller
                 'userId' => $userid,
                 'taskId' => $taskId,
             ]);
-            Flash::success('Be sure to complete before deadline.');
+            Flash::success('Remember to complete before deadline.');
             return Redirect::to('task/view');
         } else {
             Flash::error('You have already taken that task.');

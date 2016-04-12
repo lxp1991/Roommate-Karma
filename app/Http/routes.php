@@ -68,6 +68,8 @@ Route::group(['middleware' => 'web'], function () {
     	return view('settings');
     })->middleware('auth');
 
-    Route::get('/profile', 'ProfileController@show')->middleware('auth');
+    Route::get('/profile', 'ProfileController@showCurrentUser')->middleware('auth');
+
+    Route::get('/profile/{id}', 'ProfileController@showUserById')->middleware('auth');
 
 });

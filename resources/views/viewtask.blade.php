@@ -74,9 +74,9 @@
         				<div class="timeline-badge info">
         			@endif
 
-        			@if ($tasks[$i]->isCompleted)
+        			@if ($tasks[$i]->isTaken)
         					<i class="fa fa-check"></i>
-                    @elseif ($tasks[$i]->isTaken) 
+                    @elseif ($tasks[$i]->isCompleted) 
                             <i class="fa fa-legal"></i>
         			@elseif ($tasks[$i]->isActive)
         					<i class="fa fa-play"></i>
@@ -92,6 +92,7 @@
 	                        <h3 class="timeline-title">{{ $tasks[$i]->title }}</h3>
 	                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{ $tasks[$i]->releaseDate }}</small>
 	                        <small class="text-muted"><i class="fa fa-dollar"></i>{{ $tasks[$i]->bounty }}</small>
+                            <small class="text-muted"><i class="fa fa-calendar"></i> Deadline: {{ $tasks[$i]->deadline }}</small>
 	                        </p>
 	                    </div>
                     </a>

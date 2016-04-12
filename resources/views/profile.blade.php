@@ -36,6 +36,12 @@
                     	<p>{{ $profile->email }}</p>
                     	
                     </div>
+
+                    <label class="col-md-3">Bounty</label>
+                    <div class="row">
+                        <p>{{ $profile->karmaScores }}</p>
+                        
+                    </div>
 				</div>
             </div>
         </div>

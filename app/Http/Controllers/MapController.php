@@ -17,6 +17,7 @@ class MapController extends Controller
     		->where('isActive', true)
     		->get();
     	$locations = [];
+        $userIds = [];
     	foreach ($entries as $entry) {
     		$location = $entry->address1
     					. " " 
@@ -27,8 +28,9 @@ class MapController extends Controller
     					. $entry->state
     					. " "
     					. $entry->zipcode;
+            array_push($userIds, $entry->userid);
     		array_push($locations, $location);
     	}
-    	return view('map', ['locations' => $locations]);
+    	return view('map', array('locations' => $locations, 'userIds' => $userIds));
     }
 }

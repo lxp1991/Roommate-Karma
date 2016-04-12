@@ -12,7 +12,36 @@ use Illuminate\Support\Facades\Redirect;
 class ProfileController extends Controller
 {
     //
-     public function show() {
+
+    public function showUserById($id) {
+
+        $profile = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        
+        $address = DB::table('residences')
+            ->where('userid', $id)
+            ->where('isActive', true)
+            ->first();
+
+        if (count($address) == 0) {
+            $location = "Not set up yet";  
+        } else {
+            $location = $address->address1
+                        . " " 
+                        . $address->address2 
+                        . " "
+                        . $address->city
+                        . " "
+                        . $address->state
+                        . " "
+                        . $address->zipcode;            
+        }
+
+        return view('profile', array('profile' => $profile, 'location' => $location));
+    }
+
+    public function showCurrentUser() {
     	$user = Auth::user();
     	$userid = $user->id;
 
@@ -26,20 +55,20 @@ class ProfileController extends Controller
     		->first();
 
     	if (count($address) == 0) {
-            Flash::error('You have not registered with an address, please add an address first');
-            return Redirect::to('/address/update');
+            $location = "Not set up yet";  
+        } else {
+            $location = $address->address1
+                        . " " 
+                        . $address->address2 
+                        . " "
+                        . $address->city
+                        . " "
+                        . $address->state
+                        . " "
+                        . $address->zipcode;            
         }
 
 
-    	$location = $address->address1
-    					. " " 
-    				  	. $address->address2 
-    					. " "
-    					. $address->city
-    					. " "
-    					. $address->state
-    					. " "
-    					. $address->zipcode;
 
     	return view('profile', array('profile' => $profile, 'location' => $location));
     }

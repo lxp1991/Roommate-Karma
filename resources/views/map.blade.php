@@ -2,9 +2,10 @@
 @section('page_heading','Find On Map')
 @section('section')
 <div id="locations-target" style="display: none;">
-@foreach ($locations as $location)
-    <p>{{ $location }}</p>  
-@endforeach
+@for ($i = 0; $i < count($locations); $i++)
+    <p>{{ $locations[$i] }}</p>
+    <h5>{{ $userIds[$i] }}</h5>  
+@endfor
 </div>
 <div class="col-sm-12"> 
     <div class="row">
@@ -13,15 +14,18 @@
             var map;
             // var infoWindow = new google.maps.InfoWindow();
             var bounds;
-
+            var userIds;
             function initMap() {
                 var entries = document.getElementById("locations-target").getElementsByTagName("p");
+                var userIdEntries = document.getElementById("locations-target").getElementsByTagName("h5");
+                userIds = [];
                 var locations = [];
                 bounds = new google.maps.LatLngBounds();
                 for (var i = 0; i < entries.length; i++) {
                     locations.push(entries[i].innerText);
+                    userIds.push(userIdEntries[i].innerText);
                 }
-                console.log(locations);
+                console.log(userIds);
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -34.397, lng: 150.644},
                     zoom: 6
@@ -39,19 +43,25 @@
                 // });
 
                 for (var i = 0; i < locations.length; i++) {
-                    geocodeAddress(geocoder, map, locations[i]);
+                    geocodeAddress(geocoder, map, locations[i], userIds[i]);
                 }
                 
             }
             
-            function geocodeAddress(geocoder, resultsMap, address) {
+            function geocodeAddress(geocoder, resultsMap, address, userId) {
                 geocoder.geocode({ 'address': address}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         resultsMap.setCenter(results[0].geometry.location);
                         var marker = new google.maps.Marker({
                             map: resultsMap,
-                            position: results[0].geometry.location
+                            position: results[0].geometry.location,
+                            animation: google.maps.Animation.DROP
                         });
+                        
+                        google.maps.event.addListener(marker, 'click', function () {
+                            window.location.href = "/profile/" + userId;
+                        });
+                        
                         bounds.extend(results[0].geometry.location);
                         map.fitBounds(bounds);
                     } else {
