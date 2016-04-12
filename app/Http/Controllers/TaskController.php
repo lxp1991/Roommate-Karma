@@ -14,8 +14,27 @@ class TaskController extends Controller
     //
 
     public function take($taskId) {
-        
-        return $taskId;
+        $user = Auth::user();
+        $userid = $user->id;
+        $preEntry = DB::table('activities')
+            ->where('userId', $userid)
+            ->where('taskId', $taskId)
+            ->get();
+        if (count($preEntry) == 0) {
+            DB::table('tasks')
+                ->where('taskId', $taskId)
+                ->update(['isTaken' => true]);
+            DB::table('activities')->insert([
+                'userId' => $userid,
+                'taskId' => $taskId,
+            ]);
+            Flash::success('Be sure to complete before deadline.');
+            return Redirect::to('task/view');
+        } else {
+            Flash::error('You have already taken that task.');
+            return "You have already taken that task.";
+        }
+
     }
 
     public function taskDetail($taskId) {

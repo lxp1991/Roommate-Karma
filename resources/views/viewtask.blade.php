@@ -3,6 +3,12 @@
 @section('section')
 <div class="row">
     <div class="col-lg-8">
+     @if(Session::has('flash_notification.message'))
+        <div class="alert alert-{{ Session::get('flash_notification.level') }}" id="addr-success-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Success!</strong> {{ Session::get('flash_notification.message') }}
+        </div>
+    @endif  
     
     @section ('pane2_panel_title', 'Lastest tasks')
     @section ('pane2_panel_body')
@@ -24,7 +30,7 @@
     			</div>
         	</div>
 
-            <div class="modal fade" aria-labelledby="myModalLabel" tabindex="-1" role="dialog" id="{{$tasks[$i]->title }}">
+            <div class="modal fade" aria-labelledby="myModalLabel" tabindex="-1" role="dialog" id="confirm{{$tasks[$i]->taskId }}">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header modal-header-info">
@@ -70,10 +76,12 @@
 
         			@if ($tasks[$i]->isCompleted)
         					<i class="fa fa-check"></i>
+                    @elseif ($tasks[$i]->isTaken) 
+                            <i class="fa fa-legal"></i>
         			@elseif ($tasks[$i]->isActive)
         					<i class="fa fa-play"></i>
-        			@else 
-        					<i class="fa fa-save"></i>
+                    @else 
+                            <i class="fa fa-adjust"></i>
         			@endif 
         		</div>
 
@@ -89,9 +97,9 @@
                     </a>
                     <div class="timeline-body">
                         <p>{{ $tasks[$i]->description }}</p>
-                        @if ($tasks[$i]->isCompleted == false)
+                        @if ($tasks[$i]->isTaken == false)
                             <hr>
-                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#{{ $tasks[$i]->title }}">Take!</a>    
+                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#confirm{{ $tasks[$i]->taskId }}">Take!</a>    
                         @endif
                     </div>
                 </div>
