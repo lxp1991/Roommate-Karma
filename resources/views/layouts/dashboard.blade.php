@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('') }}">Roommate Karma</a>
+                <a class="navbar-brand" href="{{ url ('') }}">Simple Twitter</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -247,8 +247,8 @@
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                        <li {{ (Request::is('*charts') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('charts') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Live Rankings</a>
+                        <li {{ (Request::is('*user') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('/user/list') }}"><i class="fa fa-bar-chart-o fa-fw"></i> User List</a>
                             <!-- /.nav-second-level -->
                         </li>
                         <li {{ (Request::is('*tables') ? 'class="active"' : '') }}>
@@ -280,14 +280,14 @@
         </nav>
 
         <div id="page-wrapper">
-			 <div class="row">
+             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">@yield('page_heading')</h1>
                 </div>
                 <!-- /.col-lg-12 -->
            </div>
-			<div class="row">  
-				@yield('section')
+            <div class="row">  
+                @yield('section')
 
             </div>
             <!-- /#page-wrapper -->

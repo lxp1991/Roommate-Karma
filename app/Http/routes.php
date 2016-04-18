@@ -50,6 +50,7 @@ Route::group(['middleware' => 'web'], function () {
         return view('auth.passwords.email');
     })->middleware('auth');
 
+
     Route::get('/map', 'MapController@draw');
 
     Route::get('/task/view', 'TaskController@view');
@@ -67,6 +68,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/settings', function() {
     	return view('settings');
     })->middleware('auth');
+
+    
+    Route::get('/user/list', 'ProfileController@showUserList')->middleware('auth');
+
+    Route::post('/user/list/follow/{userId}', 'FollowingController@follow');
+
+    Route::post('/user/list/unfollow/{userId}', 'FollowingController@unfollow');
 
     Route::get('/profile', 'ProfileController@showCurrentUser')->middleware('auth');
 
