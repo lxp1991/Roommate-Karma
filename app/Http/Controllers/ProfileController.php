@@ -10,6 +10,31 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProfileController extends Controller
 {
+
+    public function showUserById($id) {
+        $profile = DB::table('users')
+            ->where('id', $id)
+            ->first();
+        
+        $address = DB::table('residences')
+            ->where('userid', $id)
+            ->where('isActive', true)
+            ->first();
+        if (count($address) == 0) {
+            $location = "Not set up yet";  
+        } else {
+            $location = $address->address1
+                        . " " 
+                        . $address->address2 
+                        . " "
+                        . $address->city
+                        . " "
+                        . $address->state
+                        . " "
+                        . $address->zipcode;            
+        }
+        return view('profile', array('profile' => $profile, 'location' => $location));
+    }
     //
     public function showCurrentUser() {
         $user = Auth::user();
@@ -47,8 +72,7 @@ class ProfileController extends Controller
         $currentUser = Auth::user();
         $currentUserId = $currentUser->id;
 
-        $allUsersExceptCurrent = DB::table('users')
-            ->where('id', '<>', $currentUserId)
+        $allUsers = DB::table('users')
             ->get();
 
         $userNames = [];
@@ -56,7 +80,7 @@ class ProfileController extends Controller
         $userIds = [];
         $followingStatus = [];
 
-        foreach ($allUsersExceptCurrent as $user) {
+        foreach ($allUsers as $user) {
             $fullName = $user->first_name . " " . $user->last_name;
             array_push($userNames, $fullName);
 
@@ -72,11 +96,14 @@ class ProfileController extends Controller
                 ->where('followingId', $user->id)
                 ->first();
 
-            if (count($record) == 0) {
+            if ($user->id == $currentUserId) {
+                array_push($followingStatus, "Self");
+            } else if (count($record) == 0) {
                 array_push($followingStatus, "notFollowed");
             } else {
                 array_push($followingStatus, "Followed");
             }
+
 
             $address = "";
             if (count($location) != 0) {

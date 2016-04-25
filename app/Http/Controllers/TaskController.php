@@ -13,6 +13,56 @@ class TaskController extends Controller
 {
     //
 
+    public function listAll() {
+        $user = Auth::user();
+        $userid = $user->id;
+        $takenTasks = DB::table('activities')
+            ->where('userId', $userid)
+            ->get();
+        $tasks = [];
+        foreach ($takenTasks as $task) {
+            $t = DB::table('tasks')
+                ->where('taskId', $task->taskId)
+                ->first();
+            if ($t != null) {
+                array_push($tasks, $t);
+            }
+        }
+
+        return view('tasklist', array('tasks' => $tasks));
+    }
+
+    public function done($taskId) {
+        $user = Auth::user();
+        $userid = $user->id;
+        
+        $bountyGet = DB::table('tasks')
+            ->where('taskId', $taskId)
+            ->value('bounty');
+        
+        DB::table('tasks')
+            ->where('taskId', $taskId)
+            ->update(['isCompleted' => true]);
+
+        DB::table('tasks')
+            ->where('taskId', $taskId)
+            ->update(['completeDate' => Carbon::now()]);
+        
+        $bountyOrigin = DB::table('users')
+            ->where('id', $userid)
+            ->value('karmaScores');
+
+        $bountyTotal = $bountyOrigin + $bountyGet;
+        DB::table('users')
+            ->where('id', $userid)
+            ->update(['karmaScores' => $bountyTotal]);
+        Flash::success('Congratulation. You have earned ' 
+            . $bountyGet 
+            . " this time! Total bounty: " 
+            . $bountyTotal);
+        return Redirect::to('task/list');
+    }
+
     public function take($taskId) {
         $user = Auth::user();
         $userid = $user->id;
@@ -37,10 +87,6 @@ class TaskController extends Controller
 
     }
 
-    public function taskDetail($taskId) {
-        
-        return $taskId;
-    }
 
     public function view() {
         $tasks = DB::table('tasks')->get();
@@ -50,6 +96,16 @@ class TaskController extends Controller
     public function store(Request $request) {
     	$user = Auth::user();
     	$userid = $user->id;
+
+        $bountyOrigin = DB::table('users')
+            ->where('id', $userid)
+            ->value('karmaScores');
+        if ($request->input('bounty') > $bountyOrigin) {
+            Flash::error('Sorry, you do not have enough bounty');
+            
+            return Redirect::to('task/create')
+                ->with('bountyOrigin', $bountyOrigin);
+        }
 
         //validate the submitted form
         $this->validate($request, [

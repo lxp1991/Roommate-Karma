@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('') }}">Simple Twitter</a>
+                <a class="navbar-brand" href="{{ url ('') }}">Roommate Karma</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -244,16 +244,26 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+                        
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+
                         <li {{ (Request::is('*user') ? 'class="active"' : '') }}>
                             <a href="{{ url ('/user/list') }}"><i class="fa fa-bar-chart-o fa-fw"></i> User List</a>
                             <!-- /.nav-second-level -->
                         </li>
+
+                        <li {{ (Request::is('*tasklist') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('task/list') }}"><i class="fa fa-tasks fa-fw"></i> Tasks History</a>
+                        </li>
+
+                        
                         <li {{ (Request::is('*tables') ? 'class="active"' : '') }}>
                             <a href="{{ url ('tables') }}"><i class="fa fa-table fa-fw"></i> Achievements</a>
                         </li>
+
+
 
                         <li>
                             <!-- <a href="#"><i class="fa fa-files-o fa-fw"></i> Find on Map<span class="fa arrow"></span></a> -->

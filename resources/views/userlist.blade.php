@@ -31,7 +31,9 @@
                             @elseif ($followingStatus[$i] == "Followed")
                                 {{ Form::open(array('action' => array('FollowingController@unfollow', $userIds[$i]))) }}
                                 {{ Form::submit('Unfollow', array('class' => 'btn btn-warning btn-sm btn-block')) }}
-                                {{ Form::close() }} 
+                                {{ Form::close() }}
+                            @elseif ($followingStatus[$i] == "Self")
+                                <button type="button" class="btn btn-warning btn-sm btn-block" disabled>Yourself</button>    
                             @endif
                             <!-- {{ $followingStatus[$i] }} -->
                             </td>

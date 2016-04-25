@@ -21,6 +21,7 @@ class CreateTasksTable extends Migration
             $table->text('description');
             $table->integer('bounty');
             $table->dateTime('releaseDate');
+            $table->dateTime('completeDate');
             $table->date('deadline');
             $table->string('comments');
             $table->boolean('isActive')->default(TRUE);

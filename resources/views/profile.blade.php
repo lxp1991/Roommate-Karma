@@ -7,6 +7,12 @@
 			<div class="panel noborder">
 				<!-- <div class="panel-heading"></div> -->
 				<div class="panel-body">
+                    <label class="col-md-3">User Id</label>
+                    <div class="row">
+                        <p>{{ $profile->id }}</p>
+                        
+                    </div>
+
 				    <label class="col-md-3">Name</label>
                     <div class="row">
                     	<p>{{ $profile->first_name . ' ' . $profile->last_name }}</p>

@@ -100,7 +100,10 @@
                         <p>{{ $tasks[$i]->description }}</p>
                         @if ($tasks[$i]->isTaken == false)
                             <hr>
-                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#confirm{{ $tasks[$i]->taskId }}">Take!</a>    
+                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#confirm{{ $tasks[$i]->taskId }}">Take!</a>
+                        @else
+                            <hr>
+                            <a class="btn btn-warning pull-right" disabled>Already taken!</a>
                         @endif
                     </div>
                 </div>

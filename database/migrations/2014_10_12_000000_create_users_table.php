@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->date('birth');
             $table->boolean('isActive')->default(TRUE);
-            $table->integer('karmaScores')->default(0);
+            $table->integer('karmaScores')->default(1000);
             $table->boolean('canRaiseBounty')->default(TRUE);
             $table->boolean('canTakeBounty')->default(TRUE);
             $table->string('email')->unique();

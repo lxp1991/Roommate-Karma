@@ -55,21 +55,26 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/task/view', 'TaskController@view');
 
-    Route::get('/task/{taskId}', 'TaskController@taskDetail')->middleware('auth');
+    Route::get('/task/list', 'TaskController@listAll');
+
+    Route::post('/task/list/done/{taskId}', 'TaskController@done');
 
     Route::post('/task/view/{taskId}', 'TaskController@take');
 
+    Route::post('/task/create', 'TaskController@store');
+        
     Route::get('/task/create', function() {
+        // return "Hello";
         return view('createtask');
     })->middleware('auth');
     
-    Route::post('/task/create', 'TaskController@store');
+
 
     Route::get('/settings', function() {
     	return view('settings');
     })->middleware('auth');
 
-    
+
     Route::get('/user/list', 'ProfileController@showUserList')->middleware('auth');
 
     Route::post('/user/list/follow/{userId}', 'FollowingController@follow');
