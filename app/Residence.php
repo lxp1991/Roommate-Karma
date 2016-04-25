@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Residence extends Model
 {
     //
+    public $timestamps = true;
 }

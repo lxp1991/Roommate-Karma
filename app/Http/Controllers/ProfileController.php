@@ -91,6 +91,11 @@ class ProfileController extends Controller
                 ->where('isActive', true)
                 ->first();
 
+            if (count($location) == 0) {
+                Flash::error('You have not registered with an address, please add an address first');
+                return Redirect::to('/address/update');
+            }
+
             $record = DB::table('followings')
                 ->where('userId', $currentUserId)
                 ->where('followingId', $user->id)

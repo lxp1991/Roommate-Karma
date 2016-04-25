@@ -18,6 +18,7 @@ class TaskController extends Controller
         $userid = $user->id;
         $takenTasks = DB::table('activities')
             ->where('userId', $userid)
+            ->where('action', 'taskTake')
             ->get();
         $tasks = [];
         foreach ($takenTasks as $task) {
@@ -56,6 +57,15 @@ class TaskController extends Controller
         DB::table('users')
             ->where('id', $userid)
             ->update(['karmaScores' => $bountyTotal]);
+
+
+        DB::table('activities')->insert([
+            'action' => 'taskComplete',
+            'userId' => $userid,
+            'dateTime' => Carbon::now(),
+            'taskId' => $taskId,
+        ]);
+
         Flash::success('Congratulation. You have earned ' 
             . $bountyGet 
             . " this time! Total bounty: " 
@@ -75,7 +85,9 @@ class TaskController extends Controller
                 ->where('taskId', $taskId)
                 ->update(['isTaken' => true]);
             DB::table('activities')->insert([
+                'action' => 'taskTake',
                 'userId' => $userid,
+                'dateTime' => Carbon::now(),
                 'taskId' => $taskId,
             ]);
             Flash::success('Remember to complete before deadline.');

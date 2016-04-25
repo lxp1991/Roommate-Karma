@@ -7,7 +7,7 @@
         @if(Session::has('flash_notification.message'))
             <div class="alert alert-{{ Session::get('flash_notification.level') }}" id="addr-success-alert">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Success!</strong> {{ Session::get('flash_notification.message') }}
+                {{ Session::get('flash_notification.message') }}
             </div>
         @endif  
         <div class="col-md-8 col-md-offset-2">
@@ -23,7 +23,6 @@
 
                             <div class="col-md-6">
                                 {{ Form::text('address1', null, array('class'=>'form-control', 'value'=>old('address1'))) }}
-                                <!-- {{ Form::text('first_name', null, array('class'=>'form-control input-sm','placeholder'=>'First Name')) }} -->
                                 @if ($errors->has('address1'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('address1') }}</strong>

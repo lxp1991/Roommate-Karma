@@ -10,7 +10,7 @@ use App\Http\Requests;
 use App\User;
 use App\Resident;
 use Flash;
-
+use Carbon\Carbon;
 
 class AddressController extends Controller
 {
@@ -53,6 +53,18 @@ class AddressController extends Controller
     		'type' => $request->input('type'),
     		'isActive' => true,
     	]);
+
+        $residenceId = DB::table('residences')
+            ->where('userid', $userid)
+            ->where('isActive', true)
+            ->first()->residenceId;
+
+        DB::table('activities')->insert([
+            'action' => 'addressUpdate',
+            'userId' => $userid,
+            'dateTime' => Carbon::now(),
+            'residenceId' => $residenceId,
+        ]);
 
         Flash::success('Your address has been updated!');
 

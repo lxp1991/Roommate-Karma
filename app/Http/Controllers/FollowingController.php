@@ -7,7 +7,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use Flash;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 
 class FollowingController extends Controller
@@ -29,6 +29,13 @@ class FollowingController extends Controller
 	    		'userId' => $currentUserId,
 	    		'followingId' => $followingId,
     		]);
+
+            DB::table('activities')->insert([
+                'action' => 'userFollow',
+                'userId' => $currentUserId,
+                'dateTime' => Carbon::now(),
+                'followingId' => $followingId,
+            ]);
     	}
     	
         Flash::success('You have followed this user');
@@ -53,6 +60,12 @@ class FollowingController extends Controller
     		    ->where('userId', $currentUserId)
     			->where('followingId', $followingId)
     			->delete();
+            DB::table('activities')->insert([
+                'action' => 'userUnfollow',
+                'userId' => $currentUserId,
+                'dateTime' => Carbon::now(),
+                'followingId' => $followingId,
+                ]);
     	}
 
     	Flash::success('You have unfollowed this user');

@@ -38,12 +38,16 @@ Route::group(['middleware' => 'web'], function () {
 		return View::make('mcharts');
 	})->middleware('auth');
 
-    Route::get('/address/update', function()
-    {
-        return View::make('address');
-    })->middleware('auth');
+    Route::group(['prefix' => 'address'], function () {
+        Route::get('update', function()
+        {
+            return View::make('address');
+        });
 
-    Route::post('/address/update', 'AddressController@store');
+        Route::post('update', 'AddressController@store');
+    });
+
+
 
     //TODO
     Route::get('/password/reset', function() {
@@ -53,33 +57,30 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/map', 'MapController@draw');
 
-    Route::get('/task/view', 'TaskController@view');
-
-    Route::get('/task/list', 'TaskController@listAll');
-
-    Route::post('/task/list/done/{taskId}', 'TaskController@done');
-
-    Route::post('/task/view/{taskId}', 'TaskController@take');
-
-    Route::post('/task/create', 'TaskController@store');
         
-    Route::get('/task/create', function() {
-        // return "Hello";
-        return view('createtask');
-    })->middleware('auth');
-    
-
+    Route::group(['prefix' => 'task'], function () {
+        Route::get('view', 'TaskController@view');
+        Route::get('list', 'TaskController@listAll');
+        Route::post('list/done/{taskId}', 'TaskController@done');
+        Route::post('/view/{taskId}', 'TaskController@take');
+        Route::post('create', 'TaskController@store');
+        Route::get('create', function() {
+            return view('createtask');
+        });
+    });
 
     Route::get('/settings', function() {
     	return view('settings');
     })->middleware('auth');
 
 
-    Route::get('/user/list', 'ProfileController@showUserList')->middleware('auth');
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('list', 'ProfileController@showUserList');
+        Route::post('list/follow/{userId}', 'FollowingController@follow');
+        Route::post('list/unfollow/{userId}', 'FollowingController@unfollow');
+    });
 
-    Route::post('/user/list/follow/{userId}', 'FollowingController@follow');
 
-    Route::post('/user/list/unfollow/{userId}', 'FollowingController@unfollow');
 
     Route::get('/profile', 'ProfileController@showCurrentUser')->middleware('auth');
 

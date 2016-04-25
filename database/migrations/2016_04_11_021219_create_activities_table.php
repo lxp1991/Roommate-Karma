@@ -14,8 +14,12 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('action', ['taskTake', 'taskComplete', 'taskCreate', 'addressUpdate', 'userFollow', 'userUnfollow']);
+            $table->dateTime('dateTime');
             $table->integer('userId');
             $table->integer('taskId');
+            $table->integer('followingId');
+            $table->integer('residenceId');
             $table->timestamps();
         });
     }
