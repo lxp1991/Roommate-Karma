@@ -151,6 +151,23 @@ class TaskController extends Controller
             'isTaken' => false,
             'isCompleted' => false,
         ]);
+
+        $taskId = DB::table('tasks')
+            ->where('residenceId', $residenceid)
+            ->where('userId', $userid)
+            ->where('title', $request->input('title'))
+            ->where('description', $request->input('description'))
+            ->where('deadline', $request->input('deadline'))
+            ->where('bounty', $request->input('bounty'))
+            ->first()->taskId;
+        
+
+        DB::table('activities')->insert([
+            'action' => 'taskCreate',
+            'userId' => $userid,
+            'dateTime' => Carbon::now(),
+            'taskId' => $taskId,
+        ]);
         
         Flash::success('A new task has been posted!');
     	return Redirect::to('/');

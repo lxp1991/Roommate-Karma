@@ -29,9 +29,7 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/', function() {
-		return view('home');
-	})->middleware('auth');
+    Route::get('/', 'HomeController@home')->middleware('auth');
     
     Route::get('/charts', function()
 	{

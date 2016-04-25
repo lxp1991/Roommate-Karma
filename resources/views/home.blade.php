@@ -19,12 +19,12 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>New Comments!</div>
+                                    <div class="huge">{{ $followings }}</div>
+                                    <div>New Followings!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ url('user/list') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -41,12 +41,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge">{{ $undoTasks }}</div>
                                     <div>New Tasks!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ url('task/list') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -60,15 +60,15 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-money fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>New Orders!</div>
+                                    <div class="huge">{{ $bounty }}</div>
+                                    <div>Total Bounty!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ url('profile') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -104,115 +104,66 @@
             <div class="row">
                 <div class="col-lg-8">
                 
-                @section ('pane2_panel_title', 'Responsive Timeline')
+                @section ('pane2_panel_title', 'Latest Activities')
                 @section ('pane2_panel_body')
                     
                     <!-- /.panel -->
-                    
-                        
-              
                     <ul class="timeline">
-                        <li>
-                            <div class="timeline-badge"><i class="fa fa-check"></i>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                    <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago via Twitter</small>
-                                    </p>
+                        @for ($i = 0; $i < count($activities); $i++)
+
+                            @if ($i % 2 == 1)
+                                <li class="timeline-inverted">
+                            @else
+                                <li>
+                            @endif
+                                @if ($colors = rand(0, 5)) @endif
+
+                                @if ($colors == 1)
+                                    <div class="timeline-badge">
+                                @elseif ($colors == 2)
+                                    <div class="timeline-badge success">
+                                @elseif ($colors == 3)
+                                    <div class="timeline-badge danger">
+                                @elseif ($colors == 4)
+                                    <div class="timeline-badge warning">
+                                @else
+                                    <div class="timeline-badge info">
+                                @endif
+
+                                    @if ($activities[$i]->action = 'taskComplete')
+                                            <i class="fa fa-check"></i>
+                                    @elseif ($activities[$i]->action = 'taskTake') 
+                                            <i class="fa fa-legal"></i>
+                                    @elseif ($activities[$i]->action = 'taskCreate')
+                                            <i class="fa fa-play"></i>
+                                    @elseif ($activities[$i]->action = 'addressUpdate')
+                                            <i class="fa fa-share-square-o"></i>
+                                    @elseif ($activities[$i]->action = 'userFollow')
+                                            <i class="fa fa-thumbs-up"></i>
+                                    @elseif ($activities[$i]->action = 'userUnfollow')
+                                            <i class="fa fa-thumbs-down"></i>
+                                    @else
+                                            <i class="fa fa-desktop"></i>
+                                    @endif 
                                 </div>
-                                <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-badge warning"><i class="fa fa-credit-card"></i>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem quibusdam, tenetur commodi provident cumque magni voluptatem libero, quis rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia repellendus.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium maiores odit qui est tempora eos, nostrum provident explicabo dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-badge danger"><i class="fa fa-bomb"></i>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus numquam facilis enim eaque, tenetur nam id qui vel velit similique nihil iure molestias aliquam, voluptatem totam quaerat, magni commodi quisquam.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates est quaerat asperiores sapiente, eligendi, nihil. Itaque quos, alias sapiente rerum quas odit! Aperiam officiis quidem delectus libero, omnis ut debitis!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-badge info"><i class="fa fa-save"></i>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis minus modi quam ipsum alias at est molestiae excepturi delectus nesciunt, quibusdam debitis amet, beatae consequuntur impedit nulla qui! Laborum, atque.</p>
-                                    <hr>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fa fa-gear"></i>  <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a>
-                                            </li>
-                                            <li><a href="#">Another action</a>
-                                            </li>
-                                            <li><a href="#">Something else here</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a>
-                                            </li>
-                                        </ul>
+
+
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h3 class="timeline-title">{{ $activities[$i]->action }}</h3>
+                                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{ $activities[$i]->dateTime }}</small>
+                                        </p>
+                                    </div>
+
+                                    <div class="timeline-body">
+                                        <p>{{ $activities[$i]->action }}</p>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi fuga odio quibusdam. Iure expedita, incidunt unde quis nam! Quod, quisquam. Officia quam qui adipisci quas consequuntur nostrum sequi. Consequuntur, commodi.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt obcaecati, quaerat tempore officia voluptas debitis consectetur culpa amet, accusamus dolorum fugiat, animi dicta aperiam, enim incidunt quisquam maxime neque eaque.</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+
+                            </li>
+
+                        @endfor
+                        </ul>
                         
                         <!-- /.panel-body -->
                    
