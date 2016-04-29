@@ -130,17 +130,17 @@
                                     <div class="timeline-badge info">
                                 @endif
 
-                                    @if ($activities[$i]->action = 'taskComplete')
+                                    @if ($activities[$i]->action == 'taskComplete')
                                             <i class="fa fa-check"></i>
-                                    @elseif ($activities[$i]->action = 'taskTake') 
+                                    @elseif ($activities[$i]->action == 'taskTake') 
                                             <i class="fa fa-legal"></i>
-                                    @elseif ($activities[$i]->action = 'taskCreate')
+                                    @elseif ($activities[$i]->action == 'taskCreate')
                                             <i class="fa fa-play"></i>
-                                    @elseif ($activities[$i]->action = 'addressUpdate')
+                                    @elseif ($activities[$i]->action == 'addressUpdate')
                                             <i class="fa fa-share-square-o"></i>
-                                    @elseif ($activities[$i]->action = 'userFollow')
+                                    @elseif ($activities[$i]->action == 'userFollow')
                                             <i class="fa fa-thumbs-up"></i>
-                                    @elseif ($activities[$i]->action = 'userUnfollow')
+                                    @elseif ($activities[$i]->action == 'userUnfollow')
                                             <i class="fa fa-thumbs-down"></i>
                                     @else
                                             <i class="fa fa-desktop"></i>
@@ -150,14 +150,28 @@
 
                                 <div class="timeline-panel">
                                     <div class="timeline-heading">
-                                        <h3 class="timeline-title">{{ $activities[$i]->action }}</h3>
+                                        @if ($activities[$i]->action == 'taskComplete')
+                                                <h3 class="timeline-title">Completed a task</h3>
+                                        @elseif ($activities[$i]->action == 'taskTake') 
+                                                <h3 class="timeline-title">Took a task</h3>
+                                        @elseif ($activities[$i]->action == 'taskCreate')
+                                                <h3 class="timeline-title">Created a task</h3>
+                                        @elseif ($activities[$i]->action == 'addressUpdate')
+                                                <h3 class="timeline-title">Updated an address</h3>
+                                        @elseif ($activities[$i]->action == 'userFollow')
+                                                <h3 class="timeline-title">Followed an user</h3>
+                                        @elseif ($activities[$i]->action == 'userUnfollow')
+                                                <h3 class="timeline-title">Unfollowed an user</h3>
+                                        @endif 
+
+                                        
                                         <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{ $activities[$i]->dateTime }}</small>
                                         </p>
                                     </div>
 
-                                    <div class="timeline-body">
+<!--                                     <div class="timeline-body">
                                         <p>{{ $activities[$i]->action }}</p>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                             </li>
