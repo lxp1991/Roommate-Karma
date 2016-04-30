@@ -259,9 +259,9 @@
                         </li>
 
                         
-<!--                         <li {{ (Request::is('*tables') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('tables') }}"><i class="fa fa-table fa-fw"></i> Achievements</a>
-                        </li> -->
+                        <li {{ (Request::is('*messages') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('messages') }}"><i class="fa fa-envelope-o fa-fw"></i> Message Center @include('messenger.unread-count')</a>
+                        </li>
 
 
 

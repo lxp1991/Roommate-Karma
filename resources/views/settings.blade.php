@@ -9,17 +9,7 @@
                 <strong>Success!</strong> {{ Session::get('flash_notification.message') }}
             </div>
         @endif
-        <!-- TODO -->
-        <script>
 
-
-		window.setTimeout(function() {
-    		$(".addr-success-alert").fadeTo(500, 0).slideUp(500, function(){
-        		$(this).remove(); 
-    		});
-		}, 4000);
-
- 		</script>
 		<ul class="nav nav-tabs">
 			<li class="active">
 				<a data-toggle="tab" href="#account">Account</a>

@@ -112,6 +112,7 @@ class TaskController extends Controller
         $bountyOrigin = DB::table('users')
             ->where('id', $userid)
             ->value('karmaScores');
+
         if ($request->input('bounty') > $bountyOrigin) {
             Flash::error('Sorry, you do not have enough bounty');
             
@@ -151,6 +152,12 @@ class TaskController extends Controller
             'isTaken' => false,
             'isCompleted' => false,
         ]);
+
+        $newBounty = $bountyOrigin - $request->input('bounty');
+
+        DB::table('users')
+            ->where('id', $userid)
+            ->update(['karmaScores' => $newBounty]);
 
         $taskId = DB::table('tasks')
             ->where('residenceId', $residenceid)

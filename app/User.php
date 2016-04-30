@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable
 {
@@ -14,6 +15,8 @@ class User extends Authenticatable
     // protected $fillable = [
     //     'name', 'email', 'password',
     // ];
+
+    use Messagable;
 
     public $timestamps = true;
 

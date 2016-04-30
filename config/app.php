@@ -158,6 +158,7 @@ return [
 
 	    'Collective\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
 
     ],
 

@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('gender');
+            $table->string('name');
             $table->date('birth');
             $table->boolean('isActive')->default(TRUE);
             $table->integer('karmaScores')->default(1000);
