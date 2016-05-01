@@ -33,7 +33,7 @@
                                 {{ Form::submit('Unfollow', array('class' => 'btn btn-warning btn-sm btn-block')) }}
                                 {{ Form::close() }}
                             @elseif ($followingStatus[$i] == "Self")
-                                <button type="button" class="btn btn-warning btn-sm btn-block" disabled>Yourself</button>    
+                                <button type="button" class="btn btn-secondary btn-sm btn-block" disabled>Yourself</button>    
                             @endif
                             <!-- {{ $followingStatus[$i] }} -->
                             </td>

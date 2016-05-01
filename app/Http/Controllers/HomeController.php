@@ -6,7 +6,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
-
+use App\User;
+use Carbon\Carbon;
+use Cmgmyr\Messenger\Models\Message;
+use Cmgmyr\Messenger\Models\Participant;
+use Cmgmyr\Messenger\Models\Thread;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
     /**
@@ -56,10 +63,16 @@ class HomeController extends Controller
             ->take(10)
             ->get();
 
+        $currentUserId = Auth::user()->id;
+        // All threads, ignore deleted/archived participants
+        $threads = Thread::getAllLatest()->get();
+         
         return view('home', array('undoTasks' => $undoTasks
             , 'followings' => count($followings)
             , 'bounty' => $bounty
-            , 'activities' => $activities));
+            , 'activities' => $activities
+            , 'threads' => $threads
+            , 'currentUserId' => $currentUserId));
     }
 
 }

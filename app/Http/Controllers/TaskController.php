@@ -79,6 +79,7 @@ class TaskController extends Controller
         $preEntry = DB::table('activities')
             ->where('userId', $userid)
             ->where('taskId', $taskId)
+            ->where('action', "taskTake")
             ->get();
         if (count($preEntry) == 0) {
             DB::table('tasks')

@@ -72,6 +72,16 @@ class ProfileController extends Controller
         $currentUser = Auth::user();
         $currentUserId = $currentUser->id;
 
+        $location = DB::table('residences')
+            ->where('userid', $currentUserId)
+            ->where('isActive', true)
+            ->first();
+        
+        if (count($location) == 0) {
+            Flash::error('You have not registered with an address, please add an address first');
+            return Redirect::to('/address/update');
+        }
+
         $allUsers = DB::table('users')
             ->get();
 
@@ -92,8 +102,19 @@ class ProfileController extends Controller
                 ->first();
 
             if (count($location) == 0) {
-                Flash::error('You have not registered with an address, please add an address first');
-                return Redirect::to('/address/update');
+                array_push($addresses, '');
+            } else {
+                $address = "";
+                $address = $location->address1
+                        . " " 
+                        . $location->address2 
+                        . " "
+                        . $location->city
+                        . " "
+                        . $location->state
+                        . " "
+                        . $location->zipcode;
+                array_push($addresses, $address);
             }
 
             $record = DB::table('followings')
@@ -110,19 +131,7 @@ class ProfileController extends Controller
             }
 
 
-            $address = "";
-            if (count($location) != 0) {
-                $address = $location->address1
-                        . " " 
-                        . $location->address2 
-                        . " "
-                        . $location->city
-                        . " "
-                        . $location->state
-                        . " "
-                        . $location->zipcode;
-                array_push($addresses, $address);
-            }
+            
         }
         return view('userlist', array('userIds' => $userIds, 
             'userNames' => $userNames, 

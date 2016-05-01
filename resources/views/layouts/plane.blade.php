@@ -14,6 +14,7 @@
 
 	<link rel="stylesheet" href="{{ asset("stylesheets/styles.css") }}" />
 	<link rel="stylesheet" href="{{ asset("stylesheets/customizedStyle.css") }}" />
+    
     <style type="text/css">
         #map { 
         	height: 600px;

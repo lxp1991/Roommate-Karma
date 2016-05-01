@@ -159,7 +159,6 @@ return [
 	    'Collective\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         Cmgmyr\Messenger\MessengerServiceProvider::class,
-
     ],
 
     /*
@@ -208,7 +207,7 @@ return [
 
     	'Form'	    => 'Collective\Html\FormFacade',
     	'Html'      => 'Collective\Html\HtmlFacade',
-        'Flash'     => 'Laracasts\Flash\Flash'
+        'Flash'     => 'Laracasts\Flash\Flash',
     ],
 
 ];

@@ -189,6 +189,7 @@
                 </div>
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
+
                     @section ('cchart11_panel_title','Line Chart')
                     @section ('cchart11_panel_body')
                     @include('widgets.charts.clinechart')
